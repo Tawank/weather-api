@@ -9,9 +9,10 @@
     "watch": "nodemon -e ts -w . -x npm run watch:serve",
     "watch:serve": "ts-node --files ./app.ts --inspect",
     "test": "jest",
-    "test:all": "npm test **/*.spec.ts",
     "update": "updates --update --minor && npm install",
-    "postupdate": "git diff-files --quiet package-lock.json || npm test"
+    "postupdate": "git diff-files --quiet package-lock.json || npm test",
+    "tslint": "tslint --project tsconfig.json",
+    "tslint:fix": "tslint --project tsconfig.json --fix"
   },
   "dependencies": {
     "body-parser": "1.19.0",
