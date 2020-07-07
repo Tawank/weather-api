@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { WeatherService } from '../../service/weather';
 
 describe('WeatherService', () => {
@@ -9,7 +8,7 @@ describe('WeatherService', () => {
   });
 
   it('should get back all user', () => {
-    expect(service.getUsers()).to.deep.equal(
+    expect(service.getUsers()).toEqual(
       [{
         email: 'lorem@ipsum.com',
         name: 'Lorem'
@@ -21,37 +20,37 @@ describe('WeatherService', () => {
   });
 
   it('should give back the right user', () => {
-    expect(service.getUser('Lorem')).to.deep.equal({
+    expect(service.getUser('Lorem')).toEqual({
       email: 'lorem@ipsum.com',
       name: 'Lorem'
     });
   });
 
   it('should add a new user', () => {
-    expect(service.getUsers()).to.have.length(2);
+    expect(service.getUsers()).toHaveLength(2);
     expect(service.newUser({
       email: 'test@test.com',
       name: 'test'
-    })).to.deep.equal({
+    })).toEqual({
       email: 'test@test.com',
       name: 'test'
     });
-    expect(service.getUsers()).to.have.length(3);
+    expect(service.getUsers()).toHaveLength(3);
   });
 
   it('should update a existing user', () => {
     expect(service.updateUser('Lorem', {
       email: 'changed@changed.com',
       name: 'Lorem'
-    })).to.deep.equal({
+    })).toEqual({
       email: 'changed@changed.com',
       name: 'Lorem'
     });
   });
 
   it('should delete a user', () => {
-    expect(service.getUsers()).to.have.length(2);
-    expect(service.deleteUser('Lorem')).to.equal('Lorem');
-    expect(service.getUsers()).to.have.length(1);
+    expect(service.getUsers()).toHaveLength(2);
+    expect(service.deleteUser('Lorem')).toEqual('Lorem');
+    expect(service.getUsers()).toHaveLength(1);
   });
 });

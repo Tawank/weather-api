@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { Container } from 'inversify';
 import * as bodyParser from 'body-parser';
