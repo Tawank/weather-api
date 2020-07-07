@@ -1,4 +1,4 @@
-import { WeatherService } from '../../service/weather';
+import { WeatherService } from '../../src/service/weather';
 
 describe('WeatherService', () => {
   let service;

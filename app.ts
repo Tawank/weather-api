@@ -3,8 +3,8 @@ import { Container } from 'inversify';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as helmet from 'helmet';
-import TYPES from './constant/types';
-import { WeatherService } from './service/weather';
+import TYPES from './src/constant/types';
+import { WeatherService } from './src/service/weather';
 import './controller/home';
 import './controller/weather';
 

@@ -1,5 +1,5 @@
-import { WeatherController } from '../../controller/weather';
-import { WeatherService } from '../../service/weather';
+import { WeatherController } from '../../src/controller/weather';
+import { WeatherService } from '../../src/service/weather';
 
 describe('WeatherController', () => {
   let controller;

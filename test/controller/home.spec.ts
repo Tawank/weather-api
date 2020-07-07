@@ -1,4 +1,4 @@
-import { HomeController } from '../../controller/home';
+import { HomeController } from '../../src/controller/home';
 
 describe('HomeController', () => {
   it('should give back `Home sweet home`', () => {
