@@ -1,11 +1,11 @@
-import { UserController } from '../../controller/weather';
+import { WeatherController } from '../../controller/weather';
 import { WeatherService } from '../../service/weather';
 
-describe('UserController', () => {
+describe('WeatherController', () => {
   let controller;
 
   beforeEach(() => {
-    controller = new UserController(new WeatherService());
+    controller = new WeatherController(new WeatherService());
   });
 
   it('should get back all user', () => {

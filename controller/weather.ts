@@ -7,7 +7,7 @@ import { Request } from 'express';
 import TYPES from '../constant/types';
 
 @controller('/user')
-export class UserController {
+export class WeatherController {
 
   constructor(@inject(TYPES.WeatherService) private weatherService: WeatherService) { }
 
