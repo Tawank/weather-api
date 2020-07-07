@@ -1,11 +1,12 @@
-import { injectable } from 'inversify';
+import { provide } from 'inversify-binding-decorators';
+import TYPES from '../constant/types';
 
 export interface IWeather {
   email: string;
   name: string;
 }
 
-@injectable()
+@provide(TYPES.WeatherService)
 export class WeatherService {
 
   private userStorage: IWeather[] = [{
