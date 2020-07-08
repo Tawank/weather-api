@@ -33,14 +33,16 @@ export class WeatherService {
 
   constructor (
     @inject(TYPES.AxiosClient) private axiosClient: AxiosClient
-  ) {}
+  ) {
+    this.axiosClient = axiosClient;
+  }
 
   public async getForecast (location: string): Promise<IWeatherForecast[]> {
-    const openWeatherMap = await this.fetchForecast('open-weather-map');
+    const openWeatherMap = await this.fetchForecast('open-weather-map', { location });
     const openWeatherMapDays: any[] = openWeatherMap.list;
     const coord: object = openWeatherMap.city.coord;
 
-    const climacellMicroweather: any[] = await this.fetchForecast('climacell-microweather', coord);
+    const climacellMicroweather: any[] = await this.fetchForecast('climacell-microweather', { coord });
     const climacellMicroweatherSearch: string[] = climacellMicroweather.map((x: any) => new Date(x.observation_time.value).toISOString().replace('T', ' ').substring(0, 19));
 
     const forecast: IWeatherForecast[] = [];
@@ -88,32 +90,36 @@ export class WeatherService {
       throw new Error('Location not found');
     }
 
-    const forecast = await this.fetchForecast('climate-data', null, fetchLocation.location[0].wmo).then(res => res.ClimateDataMonth);
+    const forecast = await this.fetchForecast('climate-data', { wmo: fetchLocation.location[0].wmo }).then(res => res.ClimateDataMonth);
 
     return forecast;
   }
 
-  private async fetchForecast (provider: string, coord?: any, wmo?: string): Promise<any> {
+  private async fetchForecast (provider: string, options: {
+    location?: string,
+    coord?: any,
+    wmo?: string
+  }): Promise<any> {
     let baseURL: string;
     let url: string;
     let headers: object;
     if (provider === 'open-weather-map') {
       baseURL = 'https://community-open-weather-map.p.rapidapi.com/';
-      url = '/forecast?units=metric&q=Lodz,Poland';
+      url = `/forecast?units=metric&q=${options.location}`;
       headers = {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
         'x-rapidapi-key': process.env.RAPIDAPI_KEY
       };
     } else if (provider === 'climacell-microweather') {
       baseURL = 'https://climacell-microweather-v1.p.rapidapi.com/';
-      url = `/weather/forecast/hourly?lat=${coord.lat}&lon=${coord.lon}`;
+      url = `/weather/forecast/hourly?lat=${options.coord.lat}&lon=${options.coord.lon}`;
       headers = {
         'x-rapidapi-host': 'climacell-microweather-v1.p.rapidapi.com',
         'x-rapidapi-key': process.env.RAPIDAPI_KEY
       };
     } else if (provider === 'climate-data') {
       baseURL = 'https://climate-data.p.rapidapi.com/';
-      url = `/api/getclimatedata?KEY=${wmo}`;
+      url = `/api/getclimatedata?KEY=${options.wmo}`;
       headers = {
         'x-rapidapi-host': 'climate-data.p.rapidapi.com',
         'x-rapidapi-key': process.env.RAPIDAPI_KEY

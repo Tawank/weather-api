@@ -1,14 +1,13 @@
-import { provide } from 'inversify-binding-decorators';
-import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
-import TYPES from '../constant/types';
+import { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+import { getFakeResponse } from './testUtils';
 
-@provide(TYPES.AxiosClient)
-export class AxiosClient {
-  public get (config: AxiosRequestConfig): Promise<AxiosResponse> {
+export class AxiosMock {
+
+  public get (config) {
     return this.doRequest('get', config);
   }
 
-  public post (config: AxiosRequestConfig): Promise<AxiosResponse> {
+  public post (config) {
     return this.doRequest('post', config);
   }
 
@@ -36,11 +35,8 @@ export class AxiosClient {
     config: AxiosRequestConfig
   ): Promise<AxiosResponse> {
     config = { ...config, method };
-
-    try {
-      return axios.request(config);
-    } catch (error) {
-      throw error;
-    }
+    return Promise.resolve({
+      data: getFakeResponse(config.baseURL, config.url)
+    } as AxiosResponse);
   }
 }
