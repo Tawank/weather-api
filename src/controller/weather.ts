@@ -1,38 +1,25 @@
 import {
-  controller, httpGet, httpPost, httpPut, httpDelete
+  controller, httpGet
 } from 'inversify-express-utils';
 import { inject } from 'inversify';
-import { IWeather, WeatherService } from '../service/weather';
+
+import { IWeatherForecast, IWeatherClimate, WeatherService } from '../service/weather';
 import { Request } from 'express';
+
 import TYPES from '../constant/types';
 
-@controller('/user')
+@controller('/weather')
 export class WeatherController {
 
-  constructor(@inject(TYPES.WeatherService) private weatherService: WeatherService) { }
+  constructor (@inject(TYPES.WeatherService) private weatherService: WeatherService) { }
 
-  @httpGet('/')
-  public getUsers(): IWeather[] {
-    return this.weatherService.getUsers();
+  @httpGet('/forecast')
+  public getForecast (request: Request): Promise<IWeatherForecast[]> {
+    return this.weatherService.getForecast(`${request.query.location}`);
   }
 
-  @httpGet('/:id')
-  public getUser(request: Request): IWeather {
-    return this.weatherService.getUser(request.params.id);
-  }
-
-  @httpPost('/')
-  public newUser(request: Request): IWeather {
-    return this.weatherService.newUser(request.body);
-  }
-
-  @httpPut('/:id')
-  public updateUser(request: Request): IWeather {
-    return this.weatherService.updateUser(request.params.id, request.body);
-  }
-
-  @httpDelete('/:id')
-  public deleteUser(request: Request): string {
-    return this.weatherService.deleteUser(request.params.id);
+  @httpGet('/climate')
+  public getClimate (request: Request): Promise<IWeatherClimate[]> {
+    return this.weatherService.getClimate(`${request.query.location}`);
   }
 }
