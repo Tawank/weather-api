@@ -1,16 +1,43 @@
-# Example using inversify-binding-decorators
+# Weather API
 
 ## General information
 
-In this example all the injectable entities are decorated with `@provide(TYPE)` as opposed to `@injectable()` thanks to the use of `inversify-binding-decorators`. 
+This API is using 3 other APIs to fetch informations about weather.
+Open Weather Map - general informations
+ClimaCell - precipitation
+climate data - to get climate info about this year
 
-In the `utils/mongodb` folder is a class called `client.ts`. This class is used as a general wrapper for finding, inserting, updating and deleting entries. It´s not a replacement for all MongoDB actions.
+## Project setup
+```
+yarn install
+```
 
-One of the features is that during testing the MongoDB client gets replaced by a mock class. The reason for this is, that when we tests our routers (with inversify controller) we really only want to test the routers and not if the MongoDB client successful writes something in the database. For testing the MongoDB client, we have an extra test that and only that builds up a database connection.
+### Starts server
+```
+yarn run start
+```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
+npm run tslint
+```
 
 ## Used Middleware
 
-Middleware                                              | Reason
-------------------------------------------------------- | --------------------------------------------------------------------------------------------------------
-[body-parser](https://github.com/expressjs/body-parser) | We need to access the body of a request
-[helmet](https://github.com/helmetjs/helmet)            | Adds some protection to the application and removes things like the `X-Powered-By header` from a request
+| Middleware                                              | Reason                                                                                                   |
+|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| [body-parser](https://github.com/expressjs/body-parser) | We need to access the body of a request                                                                  |
+| [helmet](https://github.com/helmetjs/helmet)            | Adds some protection to the application and removes things like the `X-Powered-By header` from a request |
+| [axios](https://github.com/axios/axios)                 | We need to fetch data from weather api                                                                   |
+
+## Endpoints
+
+| Method | Endpoint                                | Reason                                                                            |
+|--------|-----------------------------------------|-----------------------------------------------------------------------------------|
+| GET    | /weather/forecast?location=Lodz, Poland | Get forecast for given location (fetched from "Open Weather Map" and "ClimaCell") |
+| GET    | /weather/climate?location=Lodz          | Get climate info about this year                                                  |
