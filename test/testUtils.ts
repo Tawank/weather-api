@@ -50,10 +50,10 @@ export function getFakeResponse (baseURL: string, url: string) {
     ];
   }
 
-  // https://community-open-weather-map.p.rapidapi.com/forecast?units=metric&q=Lodz,Poland
+  // https://community-open-weather-map.p.rapidapi.com/forecast?units=metric&q=Lodz, Poland
   if (
     baseURL === 'https://community-open-weather-map.p.rapidapi.com/' &&
-    url === '/forecast?units=metric&q=Lodz,Poland'
+    url === '/forecast?units=metric&q=Lodz, Poland'
   ) {
     return {
       'cod': '200',
@@ -92,6 +92,75 @@ export function getFakeResponse (baseURL: string, url: string) {
             'pod': 'n'
           },
           'dt_txt': '2020-07-08 00:00:00'
+        },
+        {
+          'dt': 1594177200,
+          'main': {
+            'temp': 12.01,
+            'feels_like': 8.2,
+            'temp_min': 12.01,
+            'temp_max': 12.59,
+            'pressure': 1015,
+            'sea_level': 1015,
+            'grnd_level': 992,
+            'humidity': 71,
+            'temp_kf': -0.58
+          },
+          'weather': [
+            {
+              'id': 803,
+              'main': 'Clouds',
+              'description': 'broken clouds',
+              'icon': '04d'
+            }
+          ],
+          'clouds': {
+            'all': 76
+          },
+          'wind': {
+            'speed': 4.42,
+            'deg': 210
+          },
+          'sys': {
+            'pod': 'd'
+          },
+          'dt_txt': '2020-07-08 03:00:00'
+        },
+        {
+          'dt': 1594188000,
+          'main': {
+            'temp': 12.88,
+            'feels_like': 9.25,
+            'temp_min': 12.88,
+            'temp_max': 13.08,
+            'pressure': 1014,
+            'sea_level': 1014,
+            'grnd_level': 991,
+            'humidity': 76,
+            'temp_kf': -0.2
+          },
+          'weather': [
+            {
+              'id': 500,
+              'main': 'Rain',
+              'description': 'light rain',
+              'icon': '10d'
+            }
+          ],
+          'clouds': {
+            'all': 92
+          },
+          'wind': {
+            'speed': 4.79,
+            'deg': 274
+          },
+          'rain': {
+            '3h': 0.2
+          },
+          'sys': {
+            'pod': 'd'
+          },
+          'dt_txt': '2020-07-08 06:00:00'
         }
       ],
       'city': {

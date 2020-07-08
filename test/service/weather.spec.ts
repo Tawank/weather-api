@@ -9,15 +9,28 @@ describe('WeatherService', () => {
   });
 
   it('should get forecast', () => {
-    expect(service.getForecast('Lodz, Poland')).toEqual(
-      [{
-        email: 'lorem@ipsum.com',
-        name: 'Lorem'
-      },
-      {
-        email: 'doloe@sit.com',
-        name: 'Dolor'
-      }]
-    );
+    return service.getForecast('Lodz, Poland').then(data => {
+      expect(data).toHaveLength(3);
+      expect(data[1].weather[0].main).toEqual('Clouds');
+    });
+  });
+
+  it('should get climate forecast', () => {
+    return service.getClimate('lodz').then(data => {
+      expect(data).toHaveLength(3);
+      expect(data[2].accumulated_rain).toEqual('46.2');
+    });
+  });
+
+  it('should return error if location in forecast does not exist', () => {
+    return service.getForecast('not exist').catch(e => {
+      expect(e.message).toEqual('Location not found');
+    });
+  });
+
+  it('should return error if location in climate forecast does not exist', () => {
+    return service.getClimate('not exist').catch(e => {
+      expect(e.message).toEqual('Location not found');
+    });
   });
 });

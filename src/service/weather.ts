@@ -39,6 +39,9 @@ export class WeatherService {
 
   public async getForecast (location: string): Promise<IWeatherForecast[]> {
     const openWeatherMap = await this.fetchForecast('open-weather-map', { location });
+    if (!openWeatherMap || openWeatherMap.message === 'city not found') {
+      throw new Error('Location not found');
+    }
     const openWeatherMapDays: any[] = openWeatherMap.list;
     const coord: object = openWeatherMap.city.coord;
 
@@ -86,7 +89,7 @@ export class WeatherService {
     );
     const fetchLocation = await this.axiosClient.get(config).then(res => res.data);
 
-    if (fetchLocation.location.length === 0) {
+    if (!fetchLocation || fetchLocation.location.length === 0) {
       throw new Error('Location not found');
     }
 
