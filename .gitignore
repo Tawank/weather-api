@@ -39,3 +39,6 @@ typings
 
 #temp files
 temp
+
+#.env
+.env
