@@ -24,7 +24,7 @@ yarn run test
 
 ### Lints and fixes files
 ```
-npm run tslint
+yarn run tslint
 ```
 
 ## Used Middleware
