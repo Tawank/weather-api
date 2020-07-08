@@ -13,7 +13,8 @@
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "types": [
-      "node"
+      "node",
+      "jest"
     ]
   },
   "compileOnSave": false,
