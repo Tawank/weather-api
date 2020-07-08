@@ -1,21 +1,24 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "lib": [
-            "es6",
-            "dom"
-        ],
-        "noImplicitAny": false,
-        "sourceMap": false,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "moduleResolution": "node",
-        "noUnusedLocals": true
-    },
-    "compileOnSave": false,
-    "exclude": [
-      "node_modules",
-      "**/*.spec.ts"
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "types": [
+      "node"
     ]
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }
